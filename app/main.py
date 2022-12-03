@@ -1,15 +1,32 @@
-from typing import Optional
+from fastapi import FastAPI, HTTPException
 
-from fastapi import FastAPI
+import scraping
 
 app = FastAPI()
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def root():
+    return {"message": "Welcome"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/youtube/search_video")
+async def search_video(query: str):
+    try:
+        if query:
+            return scraping.get_video_result(query)
+        else:
+            raise HTTPException(status_code=400, detail="Query kosong")
+    except Exception as error:
+        raise HTTPException(status_code=500, detail="{}".format(error))
+
+
+# @app.get("/youtube/detail")
+# async def detail_video(link: str):
+#     try:
+#         if link:
+#             return scraping.get_comment_video(link)
+#         else:
+#             raise HTTPException(status_code=400, detail="Query kosong")
+#     except Exception as error:
+#         raise HTTPException(status_code=500, detail="{}".format(error))
