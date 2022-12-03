@@ -1,10 +1,4 @@
 FROM python:3.9
- 
-ARG NAMESPACE
-ARG VERSION
-ARG AUTHORS
-FROM ${NAMESPACE}/node-base:${VERSION}
-LABEL authors=${AUTHORS}
 
 USER root
 
