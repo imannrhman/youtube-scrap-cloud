@@ -10,7 +10,7 @@ options = Options()
 options.headless = True
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-driver = webdriver.Chrome(service=Service(ChromeDriverManager(path='/driver/').install()), options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager(path='/tmp/').install()), options=options)
 
 
 def get_video_result(query):
