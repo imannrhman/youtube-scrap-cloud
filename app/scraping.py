@@ -1,23 +1,7 @@
 import fuckit
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-options = Options()
-options.headless = True
-options.add_argument("start-maximized")
-options.add_argument('--disable-gpu')
-options.add_argument("disable-infobars")
-options.add_argument("--disable-extensions")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-driver = webdriver.Chrome(service=Service(ChromeDriverManager(path='/tmp/').install()), options=options)
-
-
-def get_video_result(query):
+def get_video_result(driver, query):
     youtube_data = []
 
     driver.get('https://www.youtube.com/results?search_query={}'.format(query))
@@ -97,10 +81,11 @@ def get_video_result(query):
             'extensions': extensions,
         })
 
+    driver.close()
     return youtube_data
 
 
-def get_comment_video(link):
+def get_comment_video(driver, link):
     driver.get(link)
     time.sleep(2)
 
@@ -144,5 +129,5 @@ def get_comment_video(link):
             "comment": comment_text,
             "reply": replies
         })
-
+    driver.close()
     return comments
