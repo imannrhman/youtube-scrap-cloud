@@ -1,5 +1,7 @@
 import fuckit
 import time
+from selenium.webdriver.common.by import By
+
 
 def get_video_result(driver, query):
     youtube_data = []
