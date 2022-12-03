@@ -1,16 +1,16 @@
 from fastapi import FastAPI, HTTPException
 
-import scraping
+import app.scraping as scraping
 
-app = FastAPI()
+apps = FastAPI()
 
 
-@app.get("/")
+@apps.get("/")
 async def root():
     return {"message": "Welcome"}
 
 
-@app.get("/youtube/search_video")
+@apps.get("/youtube/search_video")
 async def search_video(query: str):
     try:
         if query:
