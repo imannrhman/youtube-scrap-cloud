@@ -7,19 +7,17 @@ def get_video_result(driver, query):
     youtube_data = []
 
     driver.get('https://www.youtube.com/results?search_query={}'.format(query))
-    time.sleep(2)
+    time.sleep(1)
+
     prev_size = 0
     size_rendered_video = 1
-    y = 1000  
-    elem_scroll = driver.find_element(By.XPATH, "/html/body/ytd-app/ytd-third-party-manager")  
+    y = 1000
+    elem_scroll = driver.find_element(By.XPATH, "/html/body/ytd-app/ytd-third-party-manager")
     while prev_size != size_rendered_video:
         prev_size = size_rendered_video
-        driver.execute_script("window.scrollTo(0, "+str(y)+")")
-        y += 500  
-        time.sleep(2)
-        driver.execute_script("window.scrollTo(0, "+str(y)+")")
-        y += 500  
-        time.sleep(2)
+        driver.execute_script("window.scrollTo(0, " + str(y) + ")")
+        y += 500
+        time.sleep(1)
         size_rendered_video = len(driver.find_elements(By.CSS_SELECTOR, "ytd-video-renderer"))
 
     videos = driver.find_elements(By.CSS_SELECTOR, "#contents > ytd-video-renderer")
@@ -77,17 +75,17 @@ def get_video_result(driver, query):
 
         if thumbnail != None:
             youtube_data.append({
-            'title': title,
-            'link': link,
-            'thumbnail': thumbnail,
-            'time_video': time_video,
-            'channel': {'channel_name': channel_name, 'channel_link': channel_link, 'channel_image': channel_image},
-            'views': views,
-            'time_published': time_published,
-            'snippet': snippet,
-            'verified_badge': verified_badge,
-            'extensions': extensions,
-        })
+                'title': title,
+                'link': link,
+                'thumbnail': thumbnail,
+                'time_video': time_video,
+                'channel': {'channel_name': channel_name, 'channel_link': channel_link, 'channel_image': channel_image},
+                'views': views,
+                'time_published': time_published,
+                'snippet': snippet,
+                'verified_badge': verified_badge,
+                'extensions': extensions,
+            })
 
     driver.close()
     return youtube_data
