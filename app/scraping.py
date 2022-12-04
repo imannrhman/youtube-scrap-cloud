@@ -11,8 +11,7 @@ def get_video_result(driver, query):
 
     prev_size = 0
     size_rendered_video = 1
-    y = 1000
-    elem_scroll = driver.find_element(By.XPATH, "/html/body/ytd-app/ytd-third-party-manager")
+    y = 500
     while prev_size != size_rendered_video:
         prev_size = size_rendered_video
         driver.execute_script("window.scrollTo(0, " + str(y) + ")")
