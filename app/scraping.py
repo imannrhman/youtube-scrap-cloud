@@ -10,11 +10,16 @@ def get_video_result(driver, query):
     time.sleep(2)
     prev_size = 0
     size_rendered_video = 1
-    driver.execute_script(
-        "var scrollingElement = (document.scrollingElement || document.body);scrollingElement.scrollTop = "
-        "scrollingElement.scrollHeight;")
-    while prev_size == size_rendered_video:
+    y = 1000  
+    elem_scroll = driver.find_element(By.XPATH, "/html/body/ytd-app/ytd-third-party-manager")  
+    while prev_size != size_rendered_video:
         prev_size = size_rendered_video
+        driver.execute_script("window.scrollTo(0, "+str(y)+")")
+        y += 500  
+        time.sleep(2)
+        driver.execute_script("window.scrollTo(0, "+str(y)+")")
+        y += 500  
+        time.sleep(2)
         size_rendered_video = len(driver.find_elements(By.CSS_SELECTOR, "ytd-video-renderer"))
 
     videos = driver.find_elements(By.CSS_SELECTOR, "#contents > ytd-video-renderer")
@@ -70,7 +75,8 @@ def get_video_result(driver, query):
             else:
                 verified_badge = False
 
-        youtube_data.append({
+        if thumbnail != None:
+            youtube_data.append({
             'title': title,
             'link': link,
             'thumbnail': thumbnail,

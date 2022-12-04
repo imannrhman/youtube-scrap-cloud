@@ -1,11 +1,25 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
 import app.scraping as scraping
 
+origins = [
+    "*"
+]
+
+
 apps = FastAPI()
+
+apps.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def set_chrome_options():
