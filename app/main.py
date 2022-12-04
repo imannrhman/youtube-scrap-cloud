@@ -32,7 +32,7 @@ def set_chrome_options():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-setuid-sandbox")
 
-    chrome_options.add_argument("--remote-debugging-port=9222")  # this
+    # chrome_options.add_argument("--remote-debugging-port=9222")  # this
 
     chrome_options.add_argument("--disable-dev-shm-using")
     chrome_options.add_argument("--disable-extensions")
