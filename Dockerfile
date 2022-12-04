@@ -25,7 +25,7 @@ RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/10
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # Set display port as an environment variable
-ENV DISPLAY=:99
+ENV DISPLAY=:9222
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
