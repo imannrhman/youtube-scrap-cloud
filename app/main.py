@@ -39,7 +39,6 @@ def set_chrome_options():
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("disable-infobars")
-    chrome_options.add_argument(r"user-data-dir=.\cookies\\test")
 
     chrome_prefs = {}
 
